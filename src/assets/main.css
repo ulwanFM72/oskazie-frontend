@@ -1,0 +1,284 @@
+/* ===== Tema OSKAZIE: variabel Bootstrap 5.3 ditimpa agar tidak terlihat seperti template bawaan ===== */
+:root {
+  --osk-primary: #0b3a6b;
+  --osk-primary-600: #0f4c8a;
+  --osk-primary-900: #082c52;
+  --osk-accent: #f4a300;
+  --osk-bg: #f4f6fa;
+  --osk-surface: #ffffff;
+  --osk-text: #1b2536;
+  --osk-muted: #64708a;
+  --osk-border: #e3e8f0;
+  --osk-radius: 14px;
+  --osk-shadow: 0 1px 2px rgba(16, 24, 40, 0.06), 0 8px 24px rgba(16, 24, 40, 0.06);
+  --osk-sidebar-width: 264px;
+
+  --bs-primary: #0b3a6b;
+  --bs-primary-rgb: 11, 58, 107;
+  --bs-link-color: #0f4c8a;
+  --bs-link-color-rgb: 15, 76, 138;
+  --bs-link-hover-color: #0b3a6b;
+  --bs-link-hover-color-rgb: 11, 58, 107;
+  --bs-body-font-family: 'Inter Variable', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --bs-body-bg: var(--osk-bg);
+  --bs-body-color: var(--osk-text);
+  --bs-border-color: var(--osk-border);
+  --bs-border-radius: 10px;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Tombol: Bootstrap mengunci warna di kelas .btn-*, jadi variabelnya ditimpa di sini. */
+.btn-primary {
+  --bs-btn-bg: var(--osk-primary);
+  --bs-btn-border-color: var(--osk-primary);
+  --bs-btn-hover-bg: var(--osk-primary-600);
+  --bs-btn-hover-border-color: var(--osk-primary-600);
+  --bs-btn-active-bg: var(--osk-primary-900);
+  --bs-btn-active-border-color: var(--osk-primary-900);
+  --bs-btn-disabled-bg: var(--osk-primary);
+  --bs-btn-disabled-border-color: var(--osk-primary);
+  --bs-btn-focus-shadow-rgb: 11, 58, 107;
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--osk-primary);
+  --bs-btn-border-color: var(--osk-primary);
+  --bs-btn-hover-bg: var(--osk-primary);
+  --bs-btn-hover-border-color: var(--osk-primary);
+  --bs-btn-active-bg: var(--osk-primary-900);
+  --bs-btn-active-border-color: var(--osk-primary-900);
+  --bs-btn-disabled-color: var(--osk-primary);
+  --bs-btn-disabled-border-color: var(--osk-primary);
+  --bs-btn-focus-shadow-rgb: 11, 58, 107;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--osk-primary-600);
+  box-shadow: 0 0 0 0.25rem rgba(11, 58, 107, 0.15);
+}
+
+.card {
+  --bs-card-border-color: var(--osk-border);
+  --bs-card-border-radius: var(--osk-radius);
+  --bs-card-inner-border-radius: calc(var(--osk-radius) - 1px);
+  box-shadow: var(--osk-shadow);
+}
+
+/* ===== Logo & bagian umum ===== */
+.osk-logo {
+  display: inline-grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--osk-accent);
+  color: var(--osk-primary-900);
+  font-weight: 800;
+  font-size: 1.25rem;
+  flex: none;
+}
+
+.osk-empty {
+  display: grid;
+  justify-items: center;
+  gap: 0.25rem;
+  text-align: center;
+  color: var(--osk-muted);
+}
+.osk-empty > i {
+  font-size: 2.25rem;
+  color: var(--osk-primary-600);
+  opacity: 0.8;
+}
+
+.osk-dl {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.6rem 1.25rem;
+}
+.osk-dl dt {
+  color: var(--osk-muted);
+  font-weight: 500;
+}
+.osk-dl dd {
+  margin: 0;
+  font-weight: 600;
+}
+
+/* ===== Layout publik / bilik ===== */
+.osk-public {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background:
+    radial-gradient(1200px 400px at 50% -10%, rgba(15, 76, 138, 0.12), transparent 70%),
+    var(--osk-bg);
+}
+.osk-public-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1rem clamp(1rem, 4vw, 2.5rem);
+}
+.osk-public-main {
+  flex: 1;
+  display: grid;
+  align-items: start;
+  justify-items: center;
+  padding: 1.5rem 1rem 3rem;
+}
+.osk-public-footer {
+  text-align: center;
+  padding: 1rem;
+}
+.osk-card-narrow {
+  width: min(460px, 100%);
+}
+
+/* ===== Layout admin ===== */
+.osk-admin {
+  min-height: 100vh;
+}
+.osk-sidebar {
+  position: fixed;
+  inset: 0 auto 0 0;
+  width: var(--osk-sidebar-width);
+  background: linear-gradient(180deg, var(--osk-primary) 0%, var(--osk-primary-900) 100%);
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  z-index: 1040;
+  transform: translateX(-100%);
+  transition: transform 0.2s ease;
+}
+.osk-sidebar.is-open {
+  transform: translateX(0);
+}
+.osk-sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.1rem 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+.osk-nav {
+  display: grid;
+  gap: 0.15rem;
+  padding: 0.75rem;
+  overflow-y: auto;
+}
+.osk-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.65rem 0.85rem;
+  border-radius: 10px;
+  color: rgba(255, 255, 255, 0.82);
+  text-decoration: none;
+  font-weight: 500;
+}
+.osk-nav-link:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+.osk-nav-link.router-link-active {
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+  box-shadow: inset 3px 0 0 var(--osk-accent);
+}
+.osk-nav-link > i {
+  font-size: 1.1rem;
+  width: 1.25rem;
+  text-align: center;
+}
+.osk-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(8, 44, 82, 0.45);
+  z-index: 1030;
+}
+.osk-admin-main {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.osk-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 1020;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem clamp(1rem, 3vw, 2rem);
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--osk-border);
+}
+.osk-admin-content {
+  flex: 1;
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+@media (min-width: 992px) {
+  .osk-sidebar {
+    transform: none;
+  }
+  .osk-admin-main {
+    margin-left: var(--osk-sidebar-width);
+  }
+  .osk-backdrop {
+    display: none;
+  }
+}
+
+/* ===== Toast ===== */
+.osk-toasts {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  z-index: 1100;
+  display: grid;
+  gap: 0.5rem;
+  width: min(380px, calc(100vw - 2rem));
+}
+.osk-toast {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  background: var(--osk-surface);
+  border: 1px solid var(--osk-border);
+  border-left-width: 4px;
+  box-shadow: var(--osk-shadow);
+}
+.osk-toast-success { border-left-color: #198754; }
+.osk-toast-success > i { color: #198754; }
+.osk-toast-danger { border-left-color: #dc3545; }
+.osk-toast-danger > i { color: #dc3545; }
+.osk-toast-warning { border-left-color: var(--osk-accent); }
+.osk-toast-warning > i { color: var(--osk-accent); }
+.osk-toast-info { border-left-color: var(--osk-primary-600); }
+.osk-toast-info > i { color: var(--osk-primary-600); }
+
+.osk-toast-enter-active,
+.osk-toast-leave-active {
+  transition: all 0.2s ease;
+}
+.osk-toast-enter-from,
+.osk-toast-leave-to {
+  opacity: 0;
+  transform: translateX(16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .osk-sidebar,
+  .osk-toast-enter-active,
+  .osk-toast-leave-active {
+    transition: none;
+  }
+}
