@@ -1,8 +1,9 @@
 <script setup>
-import { APP_NAME, SCHOOL_NAME } from '@/config'
+import { APP_NAME, SCHOOL_NAME } from '@/config';
+import logoOsis from '@/assets/logo-osis.png';
 
-defineProps({ open: { type: Boolean, default: false } })
-defineEmits(['close'])
+defineProps({ open: { type: Boolean, default: false } });
+defineEmits(['close']);
 
 const items = [
   { to: 'admin-dashboard', icon: 'bi-speedometer2', label: 'Dashboard' },
@@ -14,13 +15,13 @@ const items = [
   { to: 'admin-results', icon: 'bi-bar-chart-line', label: 'Hasil' },
   { to: 'admin-announcements', icon: 'bi-megaphone', label: 'Pengumuman' },
   { to: 'admin-audit', icon: 'bi-journal-text', label: 'Audit Log' },
-]
+];
 </script>
 
 <template>
   <aside class="osk-sidebar" :class="{ 'is-open': open }" aria-label="Menu admin">
     <div class="osk-sidebar-brand">
-      <span class="osk-logo">O</span>
+      <img :src="logoOsis" class="osk-logo" alt="Logo OSIS" />
       <div>
         <div class="fw-bold lh-1">{{ APP_NAME }}</div>
         <small class="opacity-75">{{ SCHOOL_NAME }}</small>

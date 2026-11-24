@@ -1,11 +1,12 @@
 <script setup>
-import { APP_NAME, SCHOOL_NAME } from '@/config'
+import { APP_NAME, SCHOOL_NAME } from '@/config';
+import logoOsis from '@/assets/logo-osis.png';
 </script>
 
 <template>
   <div class="osk-public">
     <header class="osk-public-header">
-      <span class="osk-logo">O</span>
+      <img :src="logoOsis" class="osk-logo" alt="Logo OSIS" />
       <div>
         <div class="fw-bold lh-1">{{ APP_NAME }}</div>
         <small class="text-muted">Pemilihan Ketua &amp; Wakil Ketua OSIS {{ SCHOOL_NAME }}</small>

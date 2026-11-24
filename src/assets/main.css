@@ -70,15 +70,9 @@ body {
 
 /* ===== Logo & bagian umum ===== */
 .osk-logo {
-  display: inline-grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: var(--osk-accent);
-  color: var(--osk-primary-900);
-  font-weight: 800;
-  font-size: 1.25rem;
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
   flex: none;
 }
 
@@ -114,9 +108,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background:
-    radial-gradient(1200px 400px at 50% -10%, rgba(15, 76, 138, 0.12), transparent 70%),
-    var(--osk-bg);
+  background: radial-gradient(1200px 400px at 50% -10%, rgba(15, 76, 138, 0.12), transparent 70%), var(--osk-bg);
 }
 .osk-public-header {
   display: flex;
@@ -256,14 +248,30 @@ body {
   border-left-width: 4px;
   box-shadow: var(--osk-shadow);
 }
-.osk-toast-success { border-left-color: #198754; }
-.osk-toast-success > i { color: #198754; }
-.osk-toast-danger { border-left-color: #dc3545; }
-.osk-toast-danger > i { color: #dc3545; }
-.osk-toast-warning { border-left-color: var(--osk-accent); }
-.osk-toast-warning > i { color: var(--osk-accent); }
-.osk-toast-info { border-left-color: var(--osk-primary-600); }
-.osk-toast-info > i { color: var(--osk-primary-600); }
+.osk-toast-success {
+  border-left-color: #198754;
+}
+.osk-toast-success > i {
+  color: #198754;
+}
+.osk-toast-danger {
+  border-left-color: #dc3545;
+}
+.osk-toast-danger > i {
+  color: #dc3545;
+}
+.osk-toast-warning {
+  border-left-color: var(--osk-accent);
+}
+.osk-toast-warning > i {
+  color: var(--osk-accent);
+}
+.osk-toast-info {
+  border-left-color: var(--osk-primary-600);
+}
+.osk-toast-info > i {
+  color: var(--osk-primary-600);
+}
 
 .osk-toast-enter-active,
 .osk-toast-leave-active {
