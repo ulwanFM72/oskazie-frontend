@@ -170,6 +170,37 @@ async function saveEnd() {
   }
 }
 
+// ---------- Hapus pemilihan ----------
+const deleteOpen = ref(false)
+const deleteConfirm = ref('')
+const deleteError = ref('')
+const deleting = ref(false)
+
+function openDelete() {
+  deleteConfirm.value = ''
+  deleteError.value = ''
+  deleteOpen.value = true
+}
+
+async function removeElection() {
+  deleteError.value = ''
+  if (deleteConfirm.value !== 'HAPUS') {
+    deleteError.value = 'Ketik HAPUS (huruf kapital) untuk mengonfirmasi.'
+    return
+  }
+  deleting.value = true
+  try {
+    await adminService.deleteElection(election.value.id, { confirm: deleteConfirm.value })
+    deleteOpen.value = false
+    toast.success('Pemilihan dan seluruh datanya dihapus. Anda dapat membuat pemilihan baru.')
+    await load()
+  } catch (e) {
+    deleteError.value = e.firstError?.('confirm') ?? e.message
+  } finally {
+    deleting.value = false
+  }
+}
+
 // ---------- Perpanjang ----------
 const extendOpen = ref(false)
 const extendEnd = ref('')
@@ -238,6 +269,9 @@ async function saveExtend() {
           </button>
           <button v-if="election.status === 'berlangsung'" type="button" class="btn btn-outline-danger" @click="openEnd">
             <i class="bi bi-stop-circle me-1"></i>Akhiri lebih awal
+          </button>
+          <button v-if="election.status !== 'berlangsung'" type="button" class="btn btn-outline-danger" @click="openDelete">
+            <i class="bi bi-trash me-1"></i>Hapus pemilihan
           </button>
           <RouterLink :to="{ name: 'admin-results' }" class="btn btn-outline-secondary"><i class="bi bi-bar-chart-line me-1"></i>Hasil dan finalisasi</RouterLink>
         </div>
@@ -336,6 +370,29 @@ async function saveExtend() {
       <button type="button" class="btn btn-light" :disabled="ending" @click="endOpen = false">Batal</button>
       <button type="button" class="btn btn-danger" :disabled="ending" @click="saveEnd">
         <span v-if="ending" class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>{{ endForm.mode === 'now' ? 'Akhiri sekarang' : 'Percepat' }}
+      </button>
+    </template>
+  </BaseModal>
+
+  <!-- Hapus pemilihan -->
+  <BaseModal v-model="deleteOpen" title="Hapus pemilihan" :persistent="deleting">
+    <div v-if="deleteError" class="alert alert-danger small" role="alert">{{ deleteError }}</div>
+    <div class="alert alert-danger small">
+      <strong>Tindakan ini permanen dan tidak dapat dibatalkan.</strong> Yang dihapus: seluruh suara,
+      catatan siapa yang sudah memilih, daftar pemilih tetap ({{ election?.registered ?? 0 }} pemilih,
+      {{ election?.voted ?? 0 }} sudah memilih), pasangan calon beserta fotonya, dan periode pemilihan
+      <em>{{ election?.name }}</em>. Hasil yang sudah dipublikasikan juga ikut hilang.
+    </div>
+    <p class="small text-muted">
+      Data pemilih (siswa, guru), akun admin, dan audit log tidak ikut terhapus. Penghapusan ini dicatat di audit log.
+    </p>
+    <label for="del-confirm" class="form-label">Ketik <strong>HAPUS</strong> untuk melanjutkan</label>
+    <input id="del-confirm" v-model="deleteConfirm" class="form-control" autocomplete="off" placeholder="HAPUS" @keyup.enter="removeElection" />
+
+    <template #footer>
+      <button type="button" class="btn btn-light" :disabled="deleting" @click="deleteOpen = false">Batal</button>
+      <button type="button" class="btn btn-danger" :disabled="deleting || deleteConfirm !== 'HAPUS'" @click="removeElection">
+        <span v-if="deleting" class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>Hapus permanen
       </button>
     </template>
   </BaseModal>

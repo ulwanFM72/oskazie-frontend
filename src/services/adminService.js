@@ -18,6 +18,7 @@ export const adminService = {
   // Akhiri sekarang (tanpa end_at) atau percepat (dengan end_at). payload: { reason, end_at? }
   endElection: (id, payload) => http.patch(`/admin/elections/${id}/end`, payload).then(data),
   finalizeElection: (id) => http.post(`/admin/elections/${id}/finalize`).then(data),
+  deleteElection: (id, payload) => http.delete(`/admin/elections/${id}`, { data: payload }).then(data),
   publishElection: (id) => http.post(`/admin/elections/${id}/publish`).then(data),
   turnout: (id) => http.get(`/admin/elections/${id}/turnout`).then(data),
   results: (id) => http.get(`/admin/elections/${id}/results`).then(data),
